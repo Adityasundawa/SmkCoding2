@@ -10,7 +10,7 @@ FragmentStateAdapter(fragmentActivity) {
     private val JUMLAH_MENU = 4
     override fun createFragment(position: Int): Fragment {
         when (position) {
-            0 -> { return Home_Fragment() }
+            0 -> { return HomeActivity() }
             1 -> { return Covid_Fragment() }
             2 -> { return News_Fragment() }
             3 -> { return ProfileFragment()}

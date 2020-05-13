@@ -6,30 +6,34 @@
     android:orientation="vertical"
     android:layout_margin="5dp"
     android:padding="5dp">
+
     <TextView
-        android:id="@+id/txtFriendName"
+        android:id="@+id/txtFriendsNama"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Nama"
         android:textStyle="bold"
-        android:textSize="18sp"/>
+        android:textSize="16sp"/>
     <TextView
-        android:id="@+id/txtFriendEmail"
+        android:id="@+id/txtFriendsEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Email"
         android:textStyle="italic"
         android:textSize="16sp"/>
     <TextView
-        android:id="@+id/txtFriendTelp"
+        android:id="@+id/txtFriendsTelp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Telp"
-        android:textSize="16sp"
-        android:layout_marginTop="6dp"/>
+        android:text="No Hp"
+        android:textStyle="bold"
+        android:textSize="16sp"/>
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:layout_marginTop="5dp"
         android:background="#000000"/>
+
+
+
 </LinearLayout>
