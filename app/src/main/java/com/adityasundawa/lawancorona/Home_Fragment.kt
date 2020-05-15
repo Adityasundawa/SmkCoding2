@@ -23,6 +23,24 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class Home_Fragment : Fragment() {
+
+    lateinit var gejalaAdapter :ArrayList<GejalaCorona>
+
+    private fun tampil_gejala(){
+        gejalaAdapter = ArrayList()
+        gejalaAdapter.add(GejalaCorona("Demam","(suhu tubuh di atas 38 derajat Celsius)"))
+        gejalaAdapter.add(GejalaCorona("Demam","(suhu tubuh di atas 38 derajat Celsius)"))
+        gejalaAdapter.add(GejalaCorona("Demam","(suhu tubuh di atas 38 derajat Celsius)"))
+    }
+    private fun tampilGejala(){
+        idGeala.layoutManager = LinearLayoutManager(activity)
+        idGeala.adapter = GejalaAdapter(activity!!,gejalaAdapter)
+
+    }
+    private fun initview(){
+        tampil_gejala()
+        tampilGejala()
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -39,6 +57,7 @@ class Home_Fragment : Fragment() {
     ) {
         super.onViewCreated(view, savedInstanceState)
         callKawalCorona()
+        initview()
     }
     private fun callKawalCorona() {
         showLoading(context!!, swipeRefreshLayout)
