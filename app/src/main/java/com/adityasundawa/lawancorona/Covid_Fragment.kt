@@ -6,9 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.Nullable
 import androidx.fragment.app.Fragment
+import kotlinx.android.synthetic.main.fragment_covid.*
+
 class Covid_Fragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+      
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

@@ -7,21 +7,21 @@
     android:layout_margin="5dp"
     android:padding="5dp">
     <TextView
-        android:id="@+id/txtFriendsNama"
+        android:id="@+id/txtProvince"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Nama"
         android:textStyle="bold"
         android:textSize="16sp"/>
     <TextView
-        android:id="@+id/txtFriendsEmail"
+        android:id="@+id/txtPositive"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Email"
         android:textStyle="italic"
         android:textSize="16sp"/>
     <TextView
-        android:id="@+id/txtFriendsTelp"
+        android:id="@+id/txtMeninggal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="No Hp"
