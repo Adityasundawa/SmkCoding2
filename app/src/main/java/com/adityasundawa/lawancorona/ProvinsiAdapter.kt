@@ -24,7 +24,7 @@ class ProvinsiAdapter(private val context :Context,private val items : List<Data
     class ViewHolder(val context: Context, override val containerView : View) :
         RecyclerView.ViewHolder(containerView), LayoutContainer{
         fun bindItem(item: DataProvinsiItem, listener: (DataProvinsiItem) -> Unit) {
-            txtPositif.text = item.attributes.kasusPosi.toString()
+            txtPositive.text = item.attributes.kasusPosi.toString()
             txtMeninggal.text = item.attributes.kasusMeni.toString()
             txtSembuh.text = item.attributes.kasusSemb.toString()
             txtProvince.text = item.attributes.provinsi.toString()
