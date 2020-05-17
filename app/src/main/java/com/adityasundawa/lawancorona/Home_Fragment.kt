@@ -1,5 +1,6 @@
 package com.adityasundawa.lawancorona
 
+import GlobalAdapter
 import HomeAdapter
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import androidx.annotation.Nullable
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.adityasundawa.lawancorona.data.CoronaGlobalService
 import com.adityasundawa.lawancorona.data.CoronaService
 import com.adityasundawa.lawancorona.data.apiRequest
 import com.adityasundawa.lawancorona.data.httpClient
@@ -17,7 +19,9 @@ import com.adityasundawa.lawancorona.util.dismissLoading
 import com.adityasundawa.lawancorona.util.showLoading
 import com.adityasundawa.lawancorona.util.tampilToast
 import kotlinx.android.synthetic.*
+import kotlinx.android.synthetic.main.fragment_covid.*
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.fragment_home.swipeRefreshLayout
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -32,6 +36,43 @@ class Home_Fragment : Fragment() {
         gejalaAdapter.add(GejalaCorona("Demam","(suhu tubuh di atas 38 derajat Celsius)"))
         gejalaAdapter.add(GejalaCorona("Demam","(suhu tubuh di atas 38 derajat Celsius)"))
     }
+    private fun callApiGlobalData() {
+        showLoading(context!!, swipeRefreshLayout)
+        val httpClient = httpClient()
+        val apiRequest = apiRequest<CoronaGlobalService>(httpClient)
+        val call = apiRequest.getData()
+        call.enqueue(object : Callback<List<DataGlobalItem>> {
+            override fun onFailure(call: Call<List<DataGlobalItem>>, t: Throwable) {
+                dismissLoading(swipeRefreshLayout)
+            }
+            override fun onResponse(call: Call<List<DataGlobalItem>>, response:
+            Response<List<DataGlobalItem>>) {
+                dismissLoading(swipeRefreshLayout)
+                when {
+                    response.isSuccessful ->
+                        when {
+                            response.body()?.size != 0 ->
+                                tampilDataGlobal(response.body()!!)
+                            else -> {
+                                tampilToast(context!!, "Berhasil")
+                            }
+                        }
+                    else -> {
+                        tampilToast(context!!, "Gagal")
+                    }
+                }
+            }
+        })
+    }
+
+    private fun tampilDataGlobal(githubUsers: List<DataGlobalItem>) {
+        listGlobal.layoutManager = LinearLayoutManager(context)
+        listGlobal.adapter = GlobalAdapter(context!!, githubUsers) {
+            val githubUser = it
+            tampilToast(context!!, githubUser.attributes.countryRegion)
+        }
+    }
+
     private fun tampilGejala(){
         idGeala.layoutManager = LinearLayoutManager(activity)
         idGeala.adapter = GejalaAdapter(activity!!,gejalaAdapter)
@@ -57,7 +98,45 @@ class Home_Fragment : Fragment() {
     ) {
         super.onViewCreated(view, savedInstanceState)
         callKawalCorona()
+        callApiCovidGlobal()
         initview()
+    }
+    private fun callApiCovidGlobal(){
+        showLoading(context!!, swipeRefreshLayout)
+
+        val httpClient = httpClient()
+        val apiRequest = apiRequest<CoronaGlobalService>(httpClient)
+        val call = apiRequest.getData()
+        call.enqueue(object : Callback<List<DataGlobalItem>> {
+            override fun onFailure(call: Call<List<DataGlobalItem>>, t: Throwable) {
+                dismissLoading(swipeRefreshLayout)
+            }
+
+
+            override fun onResponse(
+                call: Call<List<DataGlobalItem>>,
+                response: Response<List<DataGlobalItem>>
+            ) {
+                dismissLoading(swipeRefreshLayout)
+                when{
+                    response.isSuccessful->when{
+                        response.body()?.size != 0-> tampilDataInter(response.body()!!)
+                        else-> tampilToast(context!!,"berhasil")
+                    }else-> tampilToast(context!!,"Gagal")
+
+                }
+            }
+        })
+    }
+
+
+    private fun tampilDataInter(dataCorona : List<DataGlobalItem>){
+        listGlobal.layoutManager = LinearLayoutManager(context)
+        listGlobal.adapter =  GlobalAdapter(context!!,dataCorona){
+            val data = it
+            tampilToast(context!!,data.attributes.countryRegion)
+        }
+
     }
     private fun callKawalCorona() {
         showLoading(context!!, swipeRefreshLayout)

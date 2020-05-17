@@ -1,5 +1,7 @@
 package com.adityasundawa.lawancorona
 
+import GlobalAdapter
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +11,7 @@ import androidx.annotation.Nullable
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.adityasundawa.lawancorona.data.CoronaGlobalService
 import com.adityasundawa.lawancorona.data.CoronaProvinsiService
 import com.adityasundawa.lawancorona.data.apiRequest
 import com.adityasundawa.lawancorona.data.httpClient
@@ -17,6 +20,8 @@ import com.adityasundawa.lawancorona.util.showLoading
 import com.adityasundawa.lawancorona.util.tampilToast
 import kotlinx.android.synthetic.*
 import kotlinx.android.synthetic.main.fragment_covid.*
+import kotlinx.android.synthetic.main.fragment_covid.swipeRefreshLayout
+import kotlinx.android.synthetic.main.fragment_home.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -24,6 +29,8 @@ import retrofit2.Response
 class Covid_Fragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,9 +43,15 @@ class Covid_Fragment : Fragment() {
         @Nullable savedInstanceState: Bundle?
     ) {
         super.onViewCreated(view, savedInstanceState)
-        callApiGetGithubUser()
+        callApiCovid()
+        btnGlobal.setOnClickListener {
+            val intent = Intent (this@Covid_Fragment.context, GlobalDataActivity::class.java)
+            startActivity(intent)
+        }
     }
-    private fun callApiGetGithubUser() {
+
+
+    private fun callApiCovid() {
         showLoading(context!!, swipeRefreshLayout)
         val httpClient = httpClient()
         val apiRequest = apiRequest<CoronaProvinsiService>(httpClient)
@@ -54,7 +67,7 @@ class Covid_Fragment : Fragment() {
                     response.isSuccessful ->
                         when {
                             response.body()?.size != 0 ->
-                                tampilGithubUser(response.body()!!)
+                                tampilCoronaIndoneisa(response.body()!!)
                             else -> {
                                 tampilToast(context!!, "Berhasil")
                             }
@@ -66,13 +79,17 @@ class Covid_Fragment : Fragment() {
             }
         })
     }
-    private fun tampilGithubUser(coronaProvinsi: List<DataProvinsiItem>) {
+
+
+    private fun tampilCoronaIndoneisa(coronaProvinsi: List<DataProvinsiItem>) {
         listDataCoronaProvince.layoutManager = LinearLayoutManager(context)
         listDataCoronaProvince.adapter = ProvinsiAdapter(context!!, coronaProvinsi) {
             val githubUser = it
             tampilToast(context!!, githubUser.attributes.provinsi)
         }
     }
+
+
     override fun onDestroy() {
         super.onDestroy()
         this.clearFindViewByIdCache()

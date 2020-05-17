@@ -95,7 +95,11 @@
 
                 </HorizontalScrollView>
 
-
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/listGlobal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="vertical"/>
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -163,31 +167,15 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
                         android:fontFamily="@font/gilroy_bold"
-                        android:text="Precautions"
+                        android:text="Data Global Corona"
                         android:layout_weight="1"
                         android:textColor="@color/colorDarkGray"
                         android:textSize="20sp" />
 
-                    <TextView
-                        android:id="@+id/txtViewPrecautions"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="15dp"
-                        android:fontFamily="@font/gilroy_light"
-                        android:text="view all"
-                        android:textColor="@color/colorGray"
-                        android:textSize="15sp" />
+
 
                 </LinearLayout>
 
-<!--                <androidx.recyclerview.widget.RecyclerView-->
-<!--                    android:id="@+id/recyclerViewPrecautions"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:orientation="horizontal"-->
-<!--                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
-<!--                    tools:itemCount="6"-->
-<!--                    tools:listitem="@layout/item_precautions" />-->
 
             </LinearLayout>
 
