@@ -97,7 +97,6 @@
                                 android:layout_height="wrap_content"
                                 android:orientation="vertical">
                                 <TextView
-
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/gilroy_bold"
@@ -120,7 +119,6 @@
                                 android:layout_height="wrap_content"
                                 android:orientation="vertical">
                                 <TextView
-
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/gilroy_bold"
@@ -129,7 +127,6 @@
                                     android:textColor="@color/colorGray"
                                     android:textSize="20sp" />
                                 <TextView
-
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/gilroy_bold"
@@ -143,11 +140,6 @@
                     </LinearLayout>
 
                 </androidx.cardview.widget.CardView>
-                 <Button
-                     android:layout_width="match_parent"
-                     android:layout_height="wrap_content"
-                     android:text="Get data global"
-                     android:id="@+id/btnGlobal"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"

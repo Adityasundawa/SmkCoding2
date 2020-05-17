@@ -44,10 +44,7 @@ class Covid_Fragment : Fragment() {
     ) {
         super.onViewCreated(view, savedInstanceState)
         callApiCovid()
-        btnGlobal.setOnClickListener {
-            val intent = Intent (this@Covid_Fragment.context, GlobalDataActivity::class.java)
-            startActivity(intent)
-        }
+    
     }
 
 

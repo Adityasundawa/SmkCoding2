@@ -6,4 +6,5 @@ data class Home (
     val email : String,
     val telp : String,
     val alamat : String
+
 )

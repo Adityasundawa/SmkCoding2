@@ -16,6 +16,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        view_pager.isUserInputEnabled = false
         val adapter = ViewPagerAdapter(this)
         view_pager.setAdapter(adapter);
         TabLayoutMediator(tab_layout, view_pager,
