@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.Nullable
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.*
@@ -15,10 +14,9 @@ class News_Fragment : Fragment() {
 
     private fun simulasiDataNews() {
         listTeman = ArrayList()
-        listTeman.add(
-            News("Seorang Pasien Positif Nekad Kabur", "Seorang Pasien Positif Nekad Kabur Rumah Sakit")
+        listTeman.add(News("Nekat, Dua Pasien Virus Corona Kabur dari Rumah Sakit ","Dua perempuan asal Rusia nekat kabur dari rumah sakit meski terindikasi tertular virus Corona.", "https://statik.tempo.co/data/2020/02/11/id_914011/914011_720.jpg")
         )
-        listTeman.add(News("Telah terjadi Kebakaran Kamar Mayat","Telah terjadi Kebakaran Kamar Mayat Dilaporkan 4 Mayat Tewas"))
+        listTeman.add(News("BREAKING NEWS - Update Perkembangan Penanganan Virus Corona dari BNPB","BREAKING NEWS - Update Perkembangan Penanganan Virus Corona dari BNPB, Jumat 20 Maret 2020","https://i.ytimg.com/vi/-iaj0K-wL7U/maxresdefault.jpg"))
     }
     private fun tampilNews() {
         rv_News.layoutManager = LinearLayoutManager(activity)
