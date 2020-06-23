@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "743242286146",
+    "firebase_url": "https://authfirebase-2c7f3.firebaseio.com",
+    "project_id": "authfirebase-2c7f3",
+    "storage_bucket": "authfirebase-2c7f3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:743242286146:android:84ca163198d75a0f1499db",
+        "android_client_info": {
+          "package_name": "com.adityasundawa.lawancorona"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "743242286146-n8ag8nqg0crr54veqblshg9k2u307vlf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.adityasundawa.lawancorona",
+            "certificate_hash": "98b703cc6656f39617f6881af9e1458e5f05879d"
+          }
+        },
+        {
+          "client_id": "743242286146-a6qphd20bsiqhpp576lku90is7sd55on.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTiz4E17-ANYt00G55xrpyJfg48zuSjK4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "743242286146-a6qphd20bsiqhpp576lku90is7sd55on.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
