@@ -1,4 +1,5 @@
 package com.adityasundawa.lawancorona
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -35,6 +36,11 @@ class ProfileFragment : Fragment() {
     ) {
         super.onViewCreated(view, savedInstanceState)
         initView()
+        btn_konsul.setOnClickListener {
+            val intent = Intent(getActivity(), KonsultasiActivity::class.java)
+            getActivity()?.startActivity(intent)
+        }
+
     }
 
     private fun initView() {
