@@ -9,8 +9,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
-    val menuText = arrayOf("Home","Covid","News","Profile")
-    val menuIcon = arrayOf(R.drawable.home,R.drawable.covid,R.drawable.news,R.drawable.profile)
+    val menuText = arrayOf("Home","Covid","News","Konsultasi","Profile")
+    val menuIcon = arrayOf(R.drawable.home,R.drawable.covid,R.drawable.news,R.drawable.profile,R.drawable.profile)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
