@@ -68,7 +68,8 @@ class KonsultasiAdapter(
                         context.startActivity(intent)
                     }
                     1 -> {
-                        listener?.onDeleteData(list.get(position), position)
+                        //Menggunakan interface untuk mengirim data mahasiswa, yang akan dihapus
+                        listener?.onDeleteData(list.get(position), position) // gak jadi pakai listener >> gagal
                         auth = FirebaseAuth.getInstance()
                         ref = FirebaseDatabase.getInstance().getReference()
                         val getUserID: String = auth?.getCurrentUser()?.getUid().toString()

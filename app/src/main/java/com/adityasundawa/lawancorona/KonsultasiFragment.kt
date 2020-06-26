@@ -7,45 +7,31 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.adityasundawa.lawancorona.viewmodel.KonsultasiFragmentViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.*
 import kotlinx.android.synthetic.main.fragment_konsultasi.*
 
 class KonsultasiFragment : Fragment(), KonsultasiAdapter.dataListener {
-    lateinit var ref: DatabaseReference
-    lateinit var auth: FirebaseAuth
-    lateinit var dataTeman: ArrayList<Konsultasi>
-    lateinit var listTeman: ArrayList<Konsul>
-    private fun simulasiDataTeman() { //ini sudah tidak digunakan lagi
-        listTeman = ArrayList()
-        listTeman.add(
-            Konsul(
-                "Aditya", "laki-laki", "86755677",
-                "081123123123"
-            )
-        )
-        listTeman.add(
-            Konsul(
-                "Sundawa", "laki-laki", "8678567567",
-                "085123123123"
-            )
-        )
-    }
 
-    private fun tampilTeman() { //ini sudah tidak digunakan lagi
-        rv_listMyFriends.layoutManager = LinearLayoutManager(activity)
-        //rv_listMyFriends.adapter = MyFriendAdapter(activity!!, listTeman)
-    }
+    lateinit var ref : DatabaseReference
+    lateinit var auth: FirebaseAuth
+    var dataTeman: MutableList<Konsultasi> = ArrayList()
+    private val viewModel by viewModels<KonsultasiFragmentViewModel>()
+    private var adapter: KonsultasiAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState:
-        Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         //Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_konsultasi, container, false)
@@ -53,33 +39,39 @@ class KonsultasiFragment : Fragment(), KonsultasiAdapter.dataListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        init()
         getData()
+        viewModel.init(requireContext());
+        viewModel.allMyFriends.observe(viewLifecycleOwner, Observer{ myFriends ->
+            myFriends?.let { adapter?.setData(it) }
+        })
         fab.setOnClickListener {
-            val intent = Intent(getActivity(), KonsulActivity::class.java)
+            val intent = Intent (getActivity(), KonsulActivity::class.java)
             getActivity()?.startActivity(intent)
         }
     }
 
+    private fun init(){
+        rv_listMyFriends.layoutManager = LinearLayoutManager(context)
+        adapter = KonsultasiAdapter(requireContext(), dataTeman)
+        rv_listMyFriends.adapter = adapter
+        adapter?.listener = this
+    }
+
     private fun getData() {
         //Mendapatkan Referensi Database
-        Toast.makeText(
-            getContext(), "Mohon Tunggu Sebentar...",
-            Toast.LENGTH_LONG
-        ).show()
+        Toast.makeText(getContext(), "Mohon Tunggu Sebentar...", Toast.LENGTH_LONG).show()
         auth = FirebaseAuth.getInstance()
         val getUserID: String = auth?.getCurrentUser()?.getUid().toString()
         ref = FirebaseDatabase.getInstance().getReference()
-        ref.child(getUserID).child("Teman").addValueEventListener(object : ValueEventListener {
+        ref.child(getUserID).child("Teman").addValueEventListener(object : ValueEventListener{
             override fun onCancelled(p0: DatabaseError) {
-                Toast.makeText(
-                    getContext(), "Database Error yaa...",
-                    Toast.LENGTH_LONG
-                ).show()
+                Toast.makeText(getContext(), "Database Error yaa...", Toast.LENGTH_LONG).show()
             }
 
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 //Inisialisasi ArrayList
-                dataTeman = java.util.ArrayList<Konsultasi>()
+                dataTeman = ArrayList()
                 for (snapshot in dataSnapshot.children) {
                     //Mapping data pada DataSnapshot ke dalam objek mahasiswa
                     val teman = snapshot.getValue(Konsultasi::class.java)
@@ -87,13 +79,7 @@ class KonsultasiFragment : Fragment(), KonsultasiAdapter.dataListener {
                     teman?.key = (snapshot.key!!)
                     dataTeman.add(teman!!)
                 }
-                //Memasang Adapter pada RecyclerView
-                rv_listMyFriends.layoutManager = LinearLayoutManager(context)
-                rv_listMyFriends.adapter = KonsultasiAdapter(context!!, dataTeman)
-                Toast.makeText(
-                    getContext(), "Data Berhasil Dimuat",
-                    Toast.LENGTH_LONG
-                ).show()
+                viewModel.insertAll(dataTeman)
             }
         })
     }
@@ -104,6 +90,25 @@ class KonsultasiFragment : Fragment(), KonsultasiAdapter.dataListener {
     }
 
     override fun onDeleteData(data: Konsultasi, position: Int) {
-        TODO("Not yet implemented")
+        /*
+         * Kode ini akan dipanggil ketika method onDeleteData
+         * dipanggil dari adapter pada RecyclerView melalui interface.
+         * kemudian akan menghapus data berdasarkan primary key dari data tersebut
+         * Jika berhasil, maka akan memunculkan Toast
+         */
+        auth = FirebaseAuth.getInstance()
+        val getUserID: String = auth?.getCurrentUser()?.getUid().toString()
+        if (ref != null) {
+            ref.child(getUserID)
+                .child("Teman")
+                .child(data?.key!!.toString())
+                .removeValue()
+                .addOnSuccessListener {
+                    Toast.makeText(context, "Data Berhasil Dihapus", Toast.LENGTH_SHORT).show()
+                    viewModel.delete(data)
+                }
+        } else {
+            Toast.makeText(context, data!!.key!!.toString(), Toast.LENGTH_LONG).show()
+        }
     }
 }
