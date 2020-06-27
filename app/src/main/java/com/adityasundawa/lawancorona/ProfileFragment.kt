@@ -36,10 +36,6 @@ class ProfileFragment : Fragment() {
     ) {
         super.onViewCreated(view, savedInstanceState)
         initView()
-        btn_konsul.setOnClickListener {
-            val intent = Intent(getActivity(), KonsultasiActivity::class.java)
-            getActivity()?.startActivity(intent)
-        }
 
     }
 

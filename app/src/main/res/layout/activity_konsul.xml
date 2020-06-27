@@ -38,9 +38,16 @@
         android:inputType="textPersonName" />
     <Button
         android:id="@+id/simpan"
+        android:text="Simpan"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="Simpan"
-        android:visibility="visible" />
+        android:background="@drawable/buttonshape"
+        android:shadowColor="#30a04a"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="5"
+        android:layout_gravity="center_horizontal"
+        />
 </LinearLayout>

@@ -30,13 +30,22 @@
     <EditText
         android:id="@+id/new_pesan"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
         android:ems="10"
         android:hint="Pesan Baru"
         android:inputType="textPersonName" />
     <Button
         android:id="@+id/update"
+        android:text="Simpan"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Update" />
+        android:background="@drawable/buttonshape"
+        android:shadowColor="#30a04a"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="5"
+        android:layout_gravity="center_horizontal"
+        />
 </LinearLayout>
