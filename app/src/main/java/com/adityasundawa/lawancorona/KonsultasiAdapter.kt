@@ -75,7 +75,7 @@ class KonsultasiAdapter(
                         val getUserID: String = auth?.getCurrentUser()?.getUid().toString()
                         if (ref != null) {
                             ref.child(getUserID)
-                                .child("Teman")
+                                .child("Konsultasi")
                                 .child(list.get(position)?.key.toString())
                                 .removeValue()
                                 .addOnSuccessListener {

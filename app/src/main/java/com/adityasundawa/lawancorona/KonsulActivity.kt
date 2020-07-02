@@ -48,7 +48,7 @@ class KonsulActivity : AppCompatActivity() {
                 Toast.LENGTH_SHORT).show()
         } else {
             val teman = Konsultasi(getNama, getEmail, getTelp, getAlamat, "")
-            ref.child(getUserID).child("Teman").push().setValue(teman).addOnCompleteListener {
+            ref.child(getUserID).child("Konsultasi").push().setValue(teman).addOnCompleteListener {
                 Toast.makeText(this, "Data Berhasil Disimpan", Toast.LENGTH_SHORT).show()
                 Nama!!.setText("")
                 Email!!.setText("")

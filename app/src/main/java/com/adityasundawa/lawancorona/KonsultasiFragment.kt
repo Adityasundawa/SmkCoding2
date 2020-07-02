@@ -20,7 +20,7 @@ class KonsultasiFragment : Fragment(), KonsultasiAdapter.dataListener {
 
     lateinit var ref : DatabaseReference
     lateinit var auth: FirebaseAuth
-    var dataTeman: MutableList<Konsultasi> = ArrayList()
+    var dataKonsul: MutableList<Konsultasi> = ArrayList()
     private val viewModel by viewModels<KonsultasiFragmentViewModel>()
     private var adapter: KonsultasiAdapter? = null
 
@@ -52,9 +52,9 @@ class KonsultasiFragment : Fragment(), KonsultasiAdapter.dataListener {
     }
 
     private fun init(){
-        rv_listMyFriends.layoutManager = LinearLayoutManager(context)
-        adapter = KonsultasiAdapter(requireContext(), dataTeman)
-        rv_listMyFriends.adapter = adapter
+        rv_Konsultasi.layoutManager = LinearLayoutManager(context)
+        adapter = KonsultasiAdapter(requireContext(), dataKonsul)
+        rv_Konsultasi.adapter = adapter
         adapter?.listener = this
     }
 
@@ -64,22 +64,19 @@ class KonsultasiFragment : Fragment(), KonsultasiAdapter.dataListener {
         auth = FirebaseAuth.getInstance()
         val getUserID: String = auth?.getCurrentUser()?.getUid().toString()
         ref = FirebaseDatabase.getInstance().getReference()
-        ref.child(getUserID).child("Teman").addValueEventListener(object : ValueEventListener{
+        ref.child(getUserID).child("Konsultasi").addValueEventListener(object : ValueEventListener{
             override fun onCancelled(p0: DatabaseError) {
                 Toast.makeText(getContext(), "Database Error yaa...", Toast.LENGTH_LONG).show()
             }
 
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                //Inisialisasi ArrayList
-                dataTeman = ArrayList()
+                dataKonsul = ArrayList()
                 for (snapshot in dataSnapshot.children) {
-                    //Mapping data pada DataSnapshot ke dalam objek mahasiswa
-                    val teman = snapshot.getValue(Konsultasi::class.java)
-                    //Mengambil Primary Key, digunakan untuk proses Update dan Delete
-                    teman?.key = (snapshot.key!!)
-                    dataTeman.add(teman!!)
+                    val konsul = snapshot.getValue(Konsultasi::class.java)
+                    konsul?.key = (snapshot.key!!)
+                    dataKonsul.add(konsul!!)
                 }
-                viewModel.insertAll(dataTeman)
+                viewModel.insertAll(dataKonsul)
             }
         })
     }
@@ -100,7 +97,7 @@ class KonsultasiFragment : Fragment(), KonsultasiAdapter.dataListener {
         val getUserID: String = auth?.getCurrentUser()?.getUid().toString()
         if (ref != null) {
             ref.child(getUserID)
-                .child("Teman")
+                .child("Konsultasi")
                 .child(data?.key!!.toString())
                 .removeValue()
                 .addOnSuccessListener {

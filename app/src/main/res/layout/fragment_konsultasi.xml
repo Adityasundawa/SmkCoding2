@@ -8,7 +8,7 @@
     android:orientation="vertical"
     tools:context=".KonsultasiFragment">
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_listMyFriends"
+        android:id="@+id/rv_Konsultasi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"/>
