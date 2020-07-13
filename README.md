@@ -1,7 +1,7 @@
 # SmkCoding2
 
 #Link Aplikasi
-https://drive.google.com/open?id=1dpTAqnDiaGdSjLk8EK-eBvhNFPrbNqng
+https://drive.google.com/file/d/1R7XUpAZs1UNxna0LLcC9qduC972hIqyX/view?usp=sharing
 
 
 #Screenshot Aplikasi
